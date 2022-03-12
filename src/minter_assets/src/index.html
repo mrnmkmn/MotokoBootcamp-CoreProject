@@ -8,32 +8,51 @@
   <base href="/" />
   <link rel="icon" href="favicon.ico" />
   <link type="text/css" rel="stylesheet" href="main.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
 <body>
-  <main>
-    <img id="nft" src="logo.png" alt="bootcamp_logo" />
+  <main role="main" class="container">
     <form action="#">
-      <label for="name">Enter a tokenURI: &nbsp;</label>
-      <input id="name" alt="Name" type="text" />
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3 col-sm-12">
+          <h1 class="text-center my-5">NFT Minter</h1>
+          <img class="my-1 img-thumbnail mx-auto d-block" id="preview-image" src="logo.png" alt="bootcamp_logo">
+          <label for="formFile" class="form-label">Select image to mint</label>
+          <input class="form-control" type="file" id="formFile" accept="image/*" onchange="preview_image(this);" required>
+          <input id="name" alt="Name" type="hidden" />
+          <input id="principal" alt="Name" type="hidden" />
+          <div class="row my-3">
+            <div class="col-6">
+              <button id="connect-plug" class="btn btn-outline-success w-100" type="button">Connect to Plug</button>
+            </div>
+            <div class="col-6">
+              <button id="connect-stoic" class="btn btn-outline-success w-100" type="button">Connect to Stoic</button>
+            </div>
+          </div>
+          <div class="row my-3 d-none">
+            <div class="col-12">
+              <p id="my-principal" class="text-center"></p>
+            </div>
+          </div>
+          <div>
+            <button id="mint" class="btn btn-primary w-100" type="button">Mint</button>
+          </div>
+          <div id="greeting" class="my-3 d-none alert alert-success" role="alert">
+          </div>
+        </div>
+      </div>
     </form>
-    <form action="#">
-      <input id="principal" alt="Name" type="hidden" />
-    </form>
-    <div>
-      <button id="connect-plug" type="submit">Connect to Plug</button>
-    </div>
-    <div>
-      <button id="connect-stoic" type="submit">Connect to Stoic</button>
-    </div>
-    <div>
-      <p id="my-principal"></p>
-    </div>
-    <div>
-      <button id="mint" type="submit">Mint !</button>
-    </div>
-    <div id="greeting"></div>
   </main>
+  <script>
+    function preview_image(e) {
+      let fileReader = new FileReader();
+      fileReader.onload = (function () {
+        document.getElementById('name').value = fileReader.result;
+      });
+      fileReader.readAsDataURL(e.files[0]);
+    }
+  </script>
 </body>
 
 </html>

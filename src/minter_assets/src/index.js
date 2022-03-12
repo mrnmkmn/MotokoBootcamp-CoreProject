@@ -39,8 +39,13 @@ async function connect_plug() {
   const principalId = await window.ic.plug.agent.getPrincipal();
 
   // console.log(`Plug's user principal Id is ${principalId}`);
-  document.getElementById("my-principal").innerText = principalId;
-  document.getElementById("principal").value = principalId;
+  let elmMyPrincipal = document.getElementById("my-principal");
+  let elmPrincipal = document.getElementById("principal");
+  if (elmPrincipal.value == "") {
+    elmMyPrincipal.closest(".d-none").classList.remove("d-none");
+  }
+  elmMyPrincipal.innerHTML = `Your Plug Principal ID<br>${principalId}!`;
+  elmPrincipal.value = principalId;
 
   // show_my_nfts(principalId);
 }
@@ -59,8 +64,13 @@ async function connect_stoic() {
 
     //Lets display the connected principal!
     // console.log(identity.getPrincipal().toText());
-    document.getElementById("my-principal").innerText = principalId;
-    document.getElementById("principal").value = principalId;
+    let elmMyPrincipal = document.getElementById("my-principal");
+    let elmPrincipal = document.getElementById("principal");
+    if (elmPrincipal.value == "") {
+      elmMyPrincipal.closest(".d-none").classList.remove("d-none");
+    }
+    elmMyPrincipal.innerHTML = `Your Stoic Principal ID<br>${principalId}!`;
+    elmPrincipal.value = principalId;
 
     //Disconnect after
     StoicIdentity.disconnect();
@@ -84,10 +94,11 @@ async function mint_nft() {
   // Get the id of the minted image.
 
   // Get the url by asking the minter contract.
-  document.getElementById("nft").src = await minter.tokenURI(mintId);
+  document.getElementById("preview-image").src = await minter.tokenURI(mintId);
 
   // Show some information about the minted image.
   document.getElementById("greeting").innerText = "this nft owner is " + principal_string + "\nthis token id is " + Number(mintId);
+  document.getElementById("greeting").classList.remove("d-none");
 }
 
 async function show_my_nfts(pid) {

@@ -1,0 +1,76 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add @psychedelic/plug-connect
+
+PATH: 
+  /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/mikito/development/flutter/bin:/Users/mikito/development/flutter/bin
+
+Yarn version: 
+  1.22.15
+
+Node version: 
+  14.17.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@psychedelic%2fplug-connect: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66140:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140885:22)
+      at Request.emit (events.js:375:28)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141857:10)
+      at Request.emit (events.js:375:28)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141779:12)
+      at Object.onceWrapper (events.js:481:28)
+      at IncomingMessage.emit (events.js:387:35)
+      at endReadableNT (internal/streams/readable.js:1317:12)
+      at processTicksAndRejections (internal/process/task_queues.js:82:21)
+
+npm manifest: 
+  {
+    "name": "minter_assets",
+    "version": "0.1.0",
+    "description": "Internet Computer starter application",
+    "keywords": [
+      "Internet Computer",
+      "Motoko",
+      "JavaScript",
+      "Canister"
+    ],
+    "scripts": {
+      "build": "webpack",
+      "prebuild": "npm run copy:types",
+      "start": "webpack serve --mode development --env development",
+      "prestart": "npm run copy:types",
+      "copy:types": "rsync -avr .dfx/$(echo ${DFX_NETWORK:-'**'})/canisters/** --exclude='assets/' --exclude='idl/' --exclude='*.wasm' --delete src/declarations"
+    },
+    "devDependencies": {
+      "@dfinity/agent": "0.10.3",
+      "@dfinity/candid": "0.10.3",
+      "@dfinity/principal": "0.10.3",
+      "assert": "2.0.0",
+      "buffer": "6.0.3",
+      "copy-webpack-plugin": "^9.0.1",
+      "events": "3.3.0",
+      "html-webpack-plugin": "5.5.0",
+      "process": "0.11.10",
+      "stream-browserify": "3.0.0",
+      "terser-webpack-plugin": "5.2.5",
+      "util": "0.12.4",
+      "webpack": "5.63.0",
+      "webpack-cli": "4.9.1",
+      "webpack-dev-server": "^4.4.0"
+    },
+    "browserslist": [
+      "last 2 chrome version",
+      "last 2 firefox version",
+      "last 2 safari version",
+      "last 2 edge version"
+    ]
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

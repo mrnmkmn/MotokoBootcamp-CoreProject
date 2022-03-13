@@ -2,14 +2,17 @@ type TokenId = nat;
 service : {
   approve: (principal, TokenId) -> ();
   balanceOf: (principal) -> (opt nat);
+  burn: (TokenId) -> ();
   getApproved: (nat) -> (principal);
   isApprovedForAll: (principal, principal) -> (bool);
   mint: (text) -> (nat);
   mint_principal: (text, principal) -> (nat);
   name: () -> (text) query;
   ownerOf: (TokenId) -> (opt principal);
+  ownerTokenIds: (principal) -> (vec TokenId) query;
   setApprovalForAll: (principal, bool) -> () oneway;
   symbol: () -> (text) query;
+  tokenIds: () -> (vec TokenId) query;
   tokenURI: (TokenId) -> (opt text) query;
   transferFrom: (principal, principal, nat) -> () oneway;
 }

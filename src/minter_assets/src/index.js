@@ -101,8 +101,11 @@ async function mint_nft() {
   document.getElementById("preview-image").src = await minter.tokenURI(mintId);
 
   // Show some information about the minted image.
-  document.getElementById("greeting").innerText = "this nft owner is " + principal_string + "\nthis token id is " + Number(mintId);
-  document.getElementById("greeting").classList.remove("d-none");
+  document.querySelector("#greeting .modal-body").innerHTML = `<ul><li>nft owner : ${principal_string}</li><li>token id : ${mintId}</li></ul>`;
+  const myModal = new bootstrap.Modal(document.getElementById('greeting'), {
+    keyboard: false
+  })
+  myModal.show();
 }
 
 async function show_my_nfts(principal) {

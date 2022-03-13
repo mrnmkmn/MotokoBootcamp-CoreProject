@@ -12,6 +12,8 @@ import {
   StoicIdentity
 } from "ic-stoic-identity";
 
+show_all_nfts();
+
 const connect_plug_button = document.getElementById("connect-plug");
 connect_plug_button.addEventListener("click", connect_plug);
 
@@ -47,7 +49,7 @@ async function connect_plug() {
   elmMyPrincipal.innerHTML = `Your Plug Principal ID<br>${principalId}!`;
   elmPrincipal.value = principalId;
 
-  // show_my_nfts(principalId);
+  show_my_nfts(principalId);
 }
 
 async function connect_stoic() {
@@ -74,6 +76,8 @@ async function connect_stoic() {
 
     //Disconnect after
     StoicIdentity.disconnect();
+
+    show_my_nfts(principalId);
   })
 
   // document.getElementById("my-principal").innerText = principalId;
@@ -101,8 +105,38 @@ async function mint_nft() {
   document.getElementById("greeting").classList.remove("d-none");
 }
 
-async function show_my_nfts(pid) {
-  // const tonkenUri = await minter.tokenURI(1);
+async function show_my_nfts(principal) {
+  const tokenIds = await minter.ownerTokenIds(principal);
 
-  // console.log(myTokenURIs());
+  for (let i = 0; i < tokenIds.length; i++) {
+    let figure = document.createElement("figure");
+    figure.classList.add("figure", "w-100", "text-center");
+    let img = document.createElement("img");
+    img.src = await minter.tokenURI(tokenIds[i]);
+    img.classList.add("img-thumbnail", "mx-auto", "d-block");
+    let figcaption = document.createElement("figcaption");
+    figcaption.classList.add("figure-caption", "text-center");
+    figcaption.innerText = `Token ID: ${tokenIds[i]}`;
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
+    document.getElementById("my-nfts").appendChild(figure);
+  }
+}
+
+async function show_all_nfts() {
+  const tokenIds = await minter.tokenIds();
+
+  for (let i = 0; i < tokenIds.length; i++) {
+    let figure = document.createElement("figure");
+    figure.classList.add("figure", "w-100", "text-center");
+    let img = document.createElement("img");
+    img.src = await minter.tokenURI(tokenIds[i]);
+    img.classList.add("figure-img", "img-thumbnail", "mx-auto", "d-block");
+    let figcaption = document.createElement("figcaption");
+    figcaption.classList.add("figure-caption", "text-center");
+    figcaption.innerText = `Token ID: ${tokenIds[i]}`;
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
+    document.getElementById("all-nfts").appendChild(figure);
+  }
 }

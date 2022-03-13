@@ -8,10 +8,12 @@ export interface DRC721 {
   'mint_principal' : (arg_0: string, arg_1: Principal) => Promise<bigint>,
   'name' : () => Promise<string>,
   'ownerOf' : (arg_0: TokenId) => Promise<[] | [Principal]>,
+  'ownerTokenIds' : (arg_0: Principal) => Promise<Array<TokenId>>,
   'setApprovalForAll' : (arg_0: Principal, arg_1: boolean) => Promise<
       undefined
     >,
   'symbol' : () => Promise<string>,
+  'tokenIds' : () => Promise<Array<TokenId>>,
   'tokenURI' : (arg_0: TokenId) => Promise<[] | [string]>,
   'transferFrom' : (
       arg_0: Principal,

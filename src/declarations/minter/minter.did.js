@@ -13,8 +13,10 @@ export const idlFactory = ({ IDL }) => {
     'mint_principal' : IDL.Func([IDL.Text, IDL.Principal], [IDL.Nat], []),
     'name' : IDL.Func([], [IDL.Text], ['query']),
     'ownerOf' : IDL.Func([TokenId], [IDL.Opt(IDL.Principal)], []),
+    'ownerTokenIds' : IDL.Func([IDL.Principal], [IDL.Vec(TokenId)], ['query']),
     'setApprovalForAll' : IDL.Func([IDL.Principal, IDL.Bool], [], ['oneway']),
     'symbol' : IDL.Func([], [IDL.Text], ['query']),
+    'tokenIds' : IDL.Func([], [IDL.Vec(TokenId)], ['query']),
     'tokenURI' : IDL.Func([TokenId], [IDL.Opt(IDL.Text)], ['query']),
     'transferFrom' : IDL.Func(
         [IDL.Principal, IDL.Principal, IDL.Nat],

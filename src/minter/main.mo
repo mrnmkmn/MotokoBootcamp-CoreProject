@@ -37,6 +37,14 @@ actor class DRC721(_name : Text, _symbol : Text) {
         return _tokenURI(tokenId);
     };
 
+    public shared query func ownerTokenIds(owner : Principal) : async [T.TokenId] {
+        return _ownerTokenIds(owner);
+    };
+
+    public shared query func tokenIds() : async [T.TokenId] {
+        return _tokenIds();
+    };
+
     public shared query func name() : async Text {
         return _name;
     };
@@ -129,6 +137,24 @@ actor class DRC721(_name : Text, _symbol : Text) {
 
     private func _tokenURI(tokenId : T.TokenId) : ?Text {
         return tokenURIs.get(tokenId);
+    };
+
+    private func _ownerTokenIds(owner : Principal) : [T.TokenId] {
+        var tokenIds : [T.TokenId] = [];
+        for ((tid, principal) in owners.entries()) {
+            if (Principal.equal(owner, principal)) {
+                tokenIds := Array.append(tokenIds, [tid]);
+            };
+        };
+        return tokenIds;
+    };
+
+    private func _tokenIds() : [T.TokenId] {
+        var tokenIds : [T.TokenId] = [];
+        for (tid in owners.keys()) {
+            tokenIds := Array.append(tokenIds, [tid]);
+        };
+        return tokenIds;
     };
 
     private func _isApprovedForAll(owner : Principal, opperator : Principal) : Bool {
